@@ -1,0 +1,22 @@
+{
+  "signin": "Sign in",
+  "please_signin": "Please sign in to continue",
+  "email": "Email",
+  "password": "Password",
+  "remember_me": "Remember me",
+  "forgot_password": "Forgot your password?",
+  "dont_have_account": "Don't have an account yet?",
+  "signup": "Sign Up",
+  "markets": "Markets",
+  "btc": "BTC",
+  "eth": "ETH",
+  "sgd": "SGD",
+  "usd": "USD",
+  "invalid_email":"Invalid email address",
+  "required":"Required",
+  "home":"Home",
+  "wallets":"Wallets",
+  "portfolio":"Portfolio",
+  "more":"More"
+
+}

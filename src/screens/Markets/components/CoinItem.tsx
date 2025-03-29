@@ -12,7 +12,6 @@ type Props = {
 };
 
 const CoinItem: FC<Props> = ({item, summaries}) => {
-  // Function
   const summaryItem = summaries?.find(s => s.marketId === item.id);
 
   const getChange = () => {
@@ -56,7 +55,7 @@ const CoinItem: FC<Props> = ({item, summaries}) => {
             uri: `https://tokenize-dev.com/assets/images/currency-logos/${item.marketCurrency.toLowerCase()}.png`,
           }}
         />
-        <View style={styles.coinDescContainer}>
+        <View style={styles.coinDetailContainer}>
           <CryptoText style={styles.coin}>{item.marketCurrency}</CryptoText>
           <CryptoText style={styles.coinName}>
             {item.marketCurrencyLong}
@@ -90,7 +89,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: Colors.primary,
     marginTop: 10,
-    padding: 16,
+    padding: 18,
     borderRadius: 8,
   },
   image: {
@@ -102,18 +101,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  coinDescContainer: {
-    marginLeft: 10,
-    gap: 8,
+  coinDetailContainer: {
+    marginLeft: 15,
   },
   priceContainer: {
     alignItems: 'flex-end',
-    gap: 8,
   },
   changeContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 2,
+    gap: 3,
   },
   profitText: {
     color: Colors.green,
@@ -129,7 +126,7 @@ const styles = StyleSheet.create({
   coin: {
     fontWeight: 700,
     fontSize: 15,
-    lineHeight: 18,
+    lineHeight: 15,
     color: Colors.black,
   },
   coinName: {
@@ -141,7 +138,7 @@ const styles = StyleSheet.create({
   price: {
     fontWeight: 500,
     fontSize: 15,
-    lineHeight: 18,
+    lineHeight: 15,
     color: Colors.black,
   },
   change: {

@@ -40,28 +40,6 @@ export const styles = StyleSheet.create({
     resizeMode: 'stretch',
   },
 
-  //Login form
-  logoContainer: {
-    alignItems: 'center',
-    gap: 10,
-  },
-  logo: {
-    width: 55,
-    height: 55,
-  },
-  signin: {
-    marginTop: 20,
-    fontWeight: 900,
-    fontSize: 23,
-    lineHeight: 30,
-    color: Colors.primary,
-  },
-  pleaseSignin: {
-    fontWeight: 500,
-    fontSize: 16,
-    lineHeight: 24,
-    color: Colors.secondary,
-  },
   loginFormContainer: {
     zIndex: 6,
     flex: 1,
@@ -75,9 +53,8 @@ export const styles = StyleSheet.create({
   input: {
     width: '100%',
     height: 47,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderColor: 'rgba(255, 255, 255, 0.2)',
-    // marginBottom: 5,
+    backgroundColor: Colors.transparentTenPercent,
+    borderColor: Colors.transparentTwentyPercent,
     borderRadius: 6,
   },
   textInput: {
@@ -92,20 +69,20 @@ export const styles = StyleSheet.create({
   functionalContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 5,
+    marginTop: 16,
   },
   rememberMe: {
-    marginLeft: 5,
+    marginLeft: 6,
     color: Colors.primary,
+    fontWeight: 500,
     fontSize: 14,
     lineHeight: 21,
-    fontWeight: 500,
   },
   forgotPassword: {
     color: Colors.primary,
+    fontWeight: 500,
     fontSize: 14,
     lineHeight: 21,
-    fontWeight: 500,
   },
   signinButton: {
     width: '100%',
@@ -122,6 +99,7 @@ export const styles = StyleSheet.create({
     fontWeight: 700,
     fontSize: 14,
     lineHeight: 16,
+    letterSpacing: 0.5,
   },
   buttonContainer: {
     width: '100%',
@@ -129,10 +107,10 @@ export const styles = StyleSheet.create({
   },
   dontHaveAccount: {
     flexDirection: 'row',
-    gap: 3,
     marginVertical: 20,
   },
   dontHaveAccountText: {
+    fontWeight: 400,
     fontSize: 14,
     lineHeight: 24,
     color: Colors.primary,
@@ -144,6 +122,7 @@ export const styles = StyleSheet.create({
     fontWeight: 700,
     textTransform: 'uppercase',
     textAlign: 'center',
+    marginLeft: 5,
   },
   errorText: {
     color: Colors.red,
@@ -164,11 +143,14 @@ export const styles = StyleSheet.create({
     lineHeight: 21,
     marginLeft: 6,
   },
-  checkboxIconStyle: {borderRadius: 4, borderColor: '#FFFFFF33'},
+  checkboxIconStyle: {
+    borderRadius: 4,
+    borderColor: Colors.transparentTwentyPercent,
+    backgroundColor: Colors.transparentTenPercent,
+  },
   iconEye: {
-    width: 20,
+    width: 19,
     height: 13,
-    marginRight: 14.35,
-    marginLeft: 10,
+    marginRight: 15,
   },
 });

@@ -5,6 +5,7 @@ import {store, persistor} from './src/redux/store/store';
 import {AppNavigation} from './src/navigations/app.navigation';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {PersistGate} from 'redux-persist/integration/react';
+import './src/locales/i18n';
 
 const App: React.FC = () => {
   return (

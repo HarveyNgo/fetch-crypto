@@ -1,12 +1,6 @@
-import {createSlice, createAsyncThunk, PayloadAction} from '@reduxjs/toolkit';
-import api, {AUTH_BASE_URL, MARKET_BASE_URL} from '../../services/api';
-import {
-  ApiResponse,
-  AuthState,
-  LoginCredentials,
-  LoginResponse,
-  User,
-} from '../../types/auth';
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import {MARKET_BASE_URL} from '../../services/api';
+import {ApiResponse} from '../../types/auth';
 import createAxiosInstance from '../../services/api';
 import {
   GetMarketResponse,
@@ -16,7 +10,7 @@ import {
 } from '../../types/markets';
 import {GET_MARKETS_SUMMARIES, GET_MARKETS_URL} from '../../services/endpoint';
 
-// // Async thunks
+// Async thunks
 export const getMarkets = createAsyncThunk<
   ApiResponse<GetMarketResponse[]>,
   getMarketsCredentials,
@@ -65,11 +59,7 @@ const initialState: MarketsState = {
 const marketsSlice = createSlice({
   name: 'markets',
   initialState,
-  reducers: {
-    // saveMarketsData: (state, action: PayloadAction<GetMarketResponse[]>) => {
-    //   state.marketsData = action.payload;
-    // },
-  },
+  reducers: {},
   extraReducers: builder => {
     builder
       .addCase(getMarkets.pending, state => {
@@ -79,7 +69,7 @@ const marketsSlice = createSlice({
         state.getMarketsDataSuccess = true;
         state.marketsData = action.payload.data;
       })
-      .addCase(getMarkets.rejected, (state, action) => {});
+      .addCase(getMarkets.rejected, () => {});
 
     builder
       .addCase(getMarketSummaries.pending, state => {
@@ -89,7 +79,7 @@ const marketsSlice = createSlice({
         state.marketsSummariesData = action.payload.data;
         state.getMarketsSummariesDataSuccess = true;
       })
-      .addCase(getMarketSummaries.rejected, (state, action) => {});
+      .addCase(getMarketSummaries.rejected, () => {});
   },
 });
 

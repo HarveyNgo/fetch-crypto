@@ -11,4 +11,10 @@ export const Colors = {
   green: '#3BBA7D',
   red: '#F94B5C',
   placeholder: '#D6E1FF',
+  active: '#6081FA',
+  inactive: '#9EA1C6',
+  marketBackgroud: '#EEF0FA',
+  errorText: 'red',
+  transparentTenPercent: 'rgba(255, 255, 255, 0.1)',
+  transparentTwentyPercent: 'rgba(255, 255, 255, 0.2)',
 };

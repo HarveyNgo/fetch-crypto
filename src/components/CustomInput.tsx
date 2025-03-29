@@ -10,7 +10,6 @@ import {
 import {TextInput} from 'react-native-gesture-handler';
 import {Colors} from '../constants/colors';
 import CryptoText from './CryptoText';
-import {FormikErrors} from 'formik';
 
 interface CustomInputProp extends TextInputProps {
   containerStyle?: StyleProp<TextStyle>;
@@ -61,19 +60,19 @@ const styles = StyleSheet.create({
   icon: {
     width: 16,
     height: 17,
-    marginLeft: 14.25,
-    marginRight: 9.72,
+    marginLeft: 14,
+    marginRight: 9,
   },
   input: {
     flex: 1,
     color: Colors.primary,
+    paddingRight: 10,
   },
   errorText: {
-    color: Colors.red,
+    color: Colors.errorText,
     fontSize: 14,
-    // fontWeight: 400,
-    // lineHeight: 16,
-    // marginBottom: 10,
+    fontWeight: 400,
+    lineHeight: 16,
   },
 });
 export default CustomInput;

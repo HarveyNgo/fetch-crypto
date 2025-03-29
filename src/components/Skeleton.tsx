@@ -25,7 +25,7 @@ const Skeleton: React.FC<SkeletonProps> = ({
         useNativeDriver: true,
       }),
     ).start();
-  }, []);
+  }, [shimmerAnim]);
 
   const shimmerTranslate = shimmerAnim.interpolate({
     inputRange: [-1, 1],

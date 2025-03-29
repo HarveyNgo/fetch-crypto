@@ -1,4 +1,3 @@
-// import {useAppSelector} from '@commons/hooks';
 import React from 'react';
 import {AuthNavigation} from './auth.navigation';
 import {MainNavigation} from './main.navigation';

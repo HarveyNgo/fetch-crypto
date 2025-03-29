@@ -16,9 +16,11 @@ import {useAppSelector} from '../../redux/hook/useAppSelector';
 import {GetMarketResponse, MarketData} from '../../types/markets';
 import CoinButton from './components/CoinButton';
 import CoinItem from './components/CoinItem';
+import {useTranslation} from 'react-i18next';
 
 const MarketsScreen = () => {
   const dispatch = useAppDispatch();
+  const {t} = useTranslation();
   const marketsData = useAppSelector(state => state.markets?.marketsData);
   const listRef = useRef<FlatList>(null);
   const marketsSummariesData = useAppSelector(
@@ -95,9 +97,9 @@ const MarketsScreen = () => {
       return (
         <FlatList
           ref={listRef}
-          style={styles.list}
+          style={styles.detailList}
           data={Array.from({length: 10})}
-          keyExtractor={(_, index) => index.toString()}
+          keyExtractor={(it, index) => index.toString()}
           renderItem={() => <Skeleton width={'100%'} height={74} />}
         />
       );
@@ -107,7 +109,7 @@ const MarketsScreen = () => {
     return (
       <FlatList
         ref={listRef}
-        style={styles.list}
+        style={styles.detailList}
         data={filteredData}
         keyExtractor={item => item.id.toString()}
         renderItem={({item}: {item: MarketData}) => (
@@ -128,20 +130,20 @@ const MarketsScreen = () => {
   ]);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <CryptoText style={styles.marketText} testID="markets-text">
-          {'markets'}
-        </CryptoText>
-        <TouchableOpacity>
-          <Image style={styles.searchIcon} source={Icons.search} />
-        </TouchableOpacity>
-      </View>
+    <View style={styles.outer}>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.header}>
+          <CryptoText style={styles.marketText}>{t('markets')}</CryptoText>
+          <TouchableOpacity>
+            <Image style={styles.searchIcon} source={Icons.search} />
+          </TouchableOpacity>
+        </View>
 
-      <View style={styles.coinList}>{_renderCoinList}</View>
+        <View style={styles.coinList}>{_renderCoinList}</View>
 
-      {_renderDetailList}
-    </SafeAreaView>
+        {_renderDetailList}
+      </SafeAreaView>
+    </View>
   );
 };
 

@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 13,
     fontWeight: 500,
-    lineHeight: 15,
     color: Colors.inactiveText,
   },
   activeText: {

@@ -1,16 +1,19 @@
-import {Platform, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {Colors} from '../../constants/colors.ts';
 
 export const styles = StyleSheet.create({
+  outer: {
+    flex: 1,
+    backgroundColor: Colors.marketBackgroud,
+  },
   container: {
     flex: 1,
-    marginHorizontal: 10,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 16,
+    marginLeft: 28,
   },
   marketText: {
     fontWeight: 700,
@@ -19,17 +22,21 @@ export const styles = StyleSheet.create({
     textTransform: 'uppercase',
     textAlign: 'center',
     color: Colors.black,
+    letterSpacing: 0.5,
   },
   searchIcon: {
-    width: 16,
-    height: 16,
+    width: 18,
+    height: 18,
+    marginRight: 19,
   },
   coinList: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 10,
+    marginTop: 20,
+    marginHorizontal: 15,
   },
-  list: {
+  detailList: {
     backgroundColor: 'transparent',
+    marginHorizontal: 10,
   },
 });

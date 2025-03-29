@@ -16,9 +16,11 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {Formik} from 'formik';
 import {useAppDispatch} from '../../../redux/hook/useAppDispatch';
 import {loginUser} from '../../../redux/slices/authSlice';
+import {useTranslation} from 'react-i18next';
 
 interface LoginFormProps {}
 const LoginForm: FC<LoginFormProps> = ({}) => {
+  const {t} = useTranslation();
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
@@ -33,14 +35,14 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
       validate={values => {
         const errors = {} as any;
         if (!values.email) {
-          errors.email = 'Required';
+          errors.email = t('required');
         } else if (
           !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
         ) {
-          errors.email = 'Invalid email address';
+          errors.email = t('invalid_email');
         }
         if (!values.password) {
-          errors.password = 'Required';
+          errors.password = t('required');
         }
         return errors;
       }}
@@ -60,7 +62,7 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
         <>
           <View style={styles.inputForm}>
             <CustomInput
-              placeholder="Email"
+              placeholder={t('email')}
               placeholderTextColor={Colors.placeholder}
               iconImage={Icons.person}
               onChangeText={handleChange('email')}
@@ -68,7 +70,7 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
               errorText={errors.email}
             />
             <CustomInput
-              placeholder="Password"
+              placeholder={t('password')}
               placeholderTextColor={Colors.placeholder}
               iconImage={Icons.lock}
               containerStyle={styles.emailCustomInput}
@@ -87,18 +89,17 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
                 size={19}
                 fillColor="#FFFFFF33"
                 unFillColor="transparent"
-                text="Custom Checkbox"
                 iconStyle={styles.checkboxIconStyle}
                 innerIconStyle={styles.checkboxIconStyle}
                 onPress={(isChecked: boolean) => {
                   console.log(isChecked);
                 }}
                 textComponent={
-                  <Text style={styles.checkboxText}>Remember me</Text>
+                  <Text style={styles.checkboxText}>{t('remember_me')}</Text>
                 }
               />
               <CryptoText style={styles.forgotPassword}>
-                {'forgot_password'}
+                {t('forgot_password')}
               </CryptoText>
             </View>
           </View>
@@ -111,15 +112,15 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
               {loading ? (
                 <ActivityIndicator size="small" color={Colors.primary} />
               ) : (
-                <Text style={styles.signinButtonText}>Sign in</Text>
+                <Text style={styles.signinButtonText}>{t('signin')}</Text>
               )}
             </TouchableOpacity>
 
             <View style={styles.dontHaveAccount}>
               <CryptoText style={styles.dontHaveAccountText}>
-                {'dont_have_account'}
+                {t('dont_have_account')}
               </CryptoText>
-              <CryptoText style={styles.signUp}>{'signup'}</CryptoText>
+              <CryptoText style={styles.signUp}>{t('signup')}</CryptoText>
             </View>
           </View>
         </>
