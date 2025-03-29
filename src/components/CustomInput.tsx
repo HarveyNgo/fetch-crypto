@@ -9,12 +9,15 @@ import {
 } from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import {Colors} from '../constants/colors';
+import CryptoText from './CryptoText';
+import {FormikErrors} from 'formik';
 
 interface CustomInputProp extends TextInputProps {
   containerStyle?: StyleProp<TextStyle>;
   iconImage: any;
   rightComponent?: React.JSX.Element;
   secureTextEntry?: boolean;
+  errorText?: any;
 }
 const CustomInput: React.FC<CustomInputProp> = ({
   containerStyle,
@@ -22,18 +25,24 @@ const CustomInput: React.FC<CustomInputProp> = ({
   iconImage,
   rightComponent,
   secureTextEntry = false,
+  errorText,
   ...props
 }) => {
   return (
-    <View style={[styles.container, containerStyle]}>
-      <Image source={iconImage} style={styles.icon} />
-      <TextInput
-        style={[styles.input, style]}
-        secureTextEntry={secureTextEntry}
-        {...props}
-      />
-      {rightComponent && rightComponent}
-    </View>
+    <>
+      <View style={[styles.container, containerStyle]}>
+        <Image source={iconImage} style={styles.icon} />
+        <TextInput
+          style={[styles.input, style]}
+          secureTextEntry={secureTextEntry}
+          {...props}
+        />
+        {rightComponent && rightComponent}
+      </View>
+      {errorText && (
+        <CryptoText style={styles.errorText}>{errorText}</CryptoText>
+      )}
+    </>
   );
 };
 
@@ -58,6 +67,13 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     color: Colors.primary,
+  },
+  errorText: {
+    color: Colors.red,
+    fontSize: 14,
+    // fontWeight: 400,
+    // lineHeight: 16,
+    // marginBottom: 10,
   },
 });
 export default CustomInput;

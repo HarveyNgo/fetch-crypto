@@ -1,10 +1,3 @@
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  avatar?: string;
-}
-
 export interface LoginCredentials {
   email: string;
   password: string;
@@ -12,17 +5,30 @@ export interface LoginCredentials {
 
 export interface AuthState {
   user: User | null;
-  token: string | null;
+  accessToken: string | null;
   isAuthenticated: boolean;
   loading: boolean;
   error: string | null;
 }
 
 export interface LoginResponse {
-  user: User;
-  token: string;
+  data: {
+    accessToken: string;
+    enableTfa: number;
+    needToChangePassword: number;
+    needVerified: number;
+    refreshToken: string;
+    user: User;
+  };
 }
 
+export interface User {
+  email: string;
+  regId: string;
+  roleName: string;
+  roleType: string;
+  userId: number;
+}
 export interface ApiResponse<T> {
   data: T;
   message: string;

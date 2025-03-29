@@ -7,14 +7,20 @@ import {
 } from 'react-native';
 import {styles} from '../styles';
 import {Icons, Images} from '../../../assets';
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {CryptoText} from '../../../components';
 import {Colors} from '../../../constants/colors';
 import CustomInput from '../../../components/CustomInput';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import {Formik} from 'formik';
+import {useAppDispatch} from '../../../redux/hook/useAppDispatch';
+import {loginUser, loginSuccess} from '../../../redux/slices/authSlice';
 
-const LoginForm = () => {
+interface LoginFormProps {}
+const LoginForm: FC<LoginFormProps> = ({}) => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
+
+  const dispatch = useAppDispatch();
 
   const toggleSecureTextEntry = () => {
     setSecureTextEntry(!secureTextEntry);
@@ -27,55 +33,99 @@ const LoginForm = () => {
         <CryptoText style={styles.signin}>{'signin'}</CryptoText>
         <CryptoText style={styles.pleaseSignin}>{'please_signin'}</CryptoText>
       </View>
-      <View style={styles.inputForm}>
-        <CustomInput
-          placeholder="Email"
-          placeholderTextColor={Colors.placeholder}
-          iconImage={Icons.person}
-        />
-        <CustomInput
-          placeholder="Password"
-          placeholderTextColor={Colors.placeholder}
-          iconImage={Icons.lock}
-          containerStyle={styles.emailCustomInput}
-          secureTextEntry={secureTextEntry}
-          rightComponent={
-            <TouchableWithoutFeedback onPress={toggleSecureTextEntry}>
-              <Image source={Icons.eyeOpen} style={styles.iconEye} />
-            </TouchableWithoutFeedback>
+      <Formik
+        initialValues={{email: '', password: ''}}
+        validate={values => {
+          const errors = {} as any;
+          if (!values.email) {
+            errors.email = 'Required';
+          } else if (
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+          ) {
+            errors.email = 'Invalid email address';
           }
-        />
-        <View style={styles.functionalContainer}>
-          <BouncyCheckbox
-            size={19}
-            fillColor="#FFFFFF33"
-            unFillColor="transparent"
-            text="Custom Checkbox"
-            iconStyle={styles.checkboxIconStyle}
-            innerIconStyle={styles.checkboxIconStyle}
-            onPress={(isChecked: boolean) => {
-              console.log(isChecked);
-            }}
-            textComponent={<Text style={styles.checkboxText}>Remember me</Text>}
-          />
-          <CryptoText style={styles.forgotPassword}>
-            {'forgot_password'}
-          </CryptoText>
-        </View>
-      </View>
+          if (!values.password) {
+            errors.password = 'Required';
+          }
+          return errors;
+        }}
+        onSubmit={values => {
+          dispatch(loginUser({email: values.email, password: values.password}))
+            .unwrap()
+            .then(data => {
+              console.log('hung success');
+              dispatch(loginSuccess(data));
+              //   navigation.replace(SCREEN_NAME.MarketsScreen);
+            })
+            .catch((error: string) => {
+              console.log('Login error:', error);
+            });
+        }}>
+        {({values, errors, handleSubmit, handleChange}) => (
+          <>
+            <View style={styles.inputForm}>
+              <CustomInput
+                placeholder="Email"
+                placeholderTextColor={Colors.placeholder}
+                iconImage={Icons.person}
+                onChangeText={handleChange('email')}
+                value={values.email}
+                errorText={errors.email}
+              />
+              <CustomInput
+                placeholder="Password"
+                placeholderTextColor={Colors.placeholder}
+                iconImage={Icons.lock}
+                containerStyle={styles.emailCustomInput}
+                secureTextEntry={secureTextEntry}
+                onChangeText={handleChange('password')}
+                value={values.password}
+                errorText={errors.password}
+                rightComponent={
+                  <TouchableWithoutFeedback onPress={toggleSecureTextEntry}>
+                    <Image source={Icons.eyeOpen} style={styles.iconEye} />
+                  </TouchableWithoutFeedback>
+                }
+              />
+              <View style={styles.functionalContainer}>
+                <BouncyCheckbox
+                  size={19}
+                  fillColor="#FFFFFF33"
+                  unFillColor="transparent"
+                  text="Custom Checkbox"
+                  iconStyle={styles.checkboxIconStyle}
+                  innerIconStyle={styles.checkboxIconStyle}
+                  onPress={(isChecked: boolean) => {
+                    console.log(isChecked);
+                  }}
+                  textComponent={
+                    <Text style={styles.checkboxText}>Remember me</Text>
+                  }
+                />
+                <CryptoText style={styles.forgotPassword}>
+                  {'forgot_password'}
+                </CryptoText>
+              </View>
+            </View>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={styles.signinButton}
+                onPress={() => {
+                  handleSubmit();
+                }}>
+                <Text style={styles.signinButtonText}>Sign in</Text>
+              </TouchableOpacity>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.signinButton}>
-          <Text style={styles.signinButtonText}>Sign in</Text>
-        </TouchableOpacity>
-
-        <View style={styles.dontHaveAccount}>
-          <CryptoText style={styles.dontHaveAccountText}>
-            {'dont_have_account'}
-          </CryptoText>
-          <CryptoText style={styles.signUp}>{'signup'}</CryptoText>
-        </View>
-      </View>
+              <View style={styles.dontHaveAccount}>
+                <CryptoText style={styles.dontHaveAccountText}>
+                  {'dont_have_account'}
+                </CryptoText>
+                <CryptoText style={styles.signUp}>{'signup'}</CryptoText>
+              </View>
+            </View>
+          </>
+        )}
+      </Formik>
     </View>
   );
 };
