@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {Dimensions, StyleSheet, View} from 'react-native';
 import {Colors} from '../../../constants/colors.ts';
 import CryptoText from '../../../components/CryptoText.tsx';
@@ -11,17 +11,9 @@ type Props = {
 
 const {width} = Dimensions.get('window');
 
-const CoinButton = (props: Props) => {
-  // Props
-  const {name, isActive, length} = props;
-
-  //Constant
+const CoinButton: FC<Props> = ({name, isActive, length}) => {
   const containerWidth = width / length - 10;
 
-  // Hook
-  // const {t} = useTranslation();
-
-  // Render UI
   return (
     <View
       style={[

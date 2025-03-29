@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Image, StyleSheet, View} from 'react-native';
-import {Icons} from '../../../assets';
+import {Icons} from '../../../assets/index.tsx';
 import {Colors} from '../../../constants/colors.ts';
 import {formatPrice} from '../../../utils/formatPrice.ts';
 import {MarketData, MarketSummaries} from '../../../types/markets.ts';
@@ -11,7 +11,7 @@ type Props = {
   summaries: MarketSummaries[];
 };
 
-const CoinCard: FC<Props> = ({item, summaries}) => {
+const CoinItem: FC<Props> = ({item, summaries}) => {
   // Function
   const summaryItem = summaries?.find(s => s.marketId === item.id);
 
@@ -79,7 +79,7 @@ const CoinCard: FC<Props> = ({item, summaries}) => {
   );
 };
 
-export default CoinCard;
+export default CoinItem;
 
 const styles = StyleSheet.create({
   container: {

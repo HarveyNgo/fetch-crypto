@@ -6,21 +6,21 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {CryptoText} from '../../components';
+import {CryptoText, Skeleton} from '../../components/index';
 import {styles} from './styles';
 import {Icons} from '../../assets';
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useAppDispatch} from '../../redux/hook/useAppDispatch';
 import {getMarkets, getMarketSummaries} from '../../redux/slices/marketsSlice';
 import {useAppSelector} from '../../redux/hook/useAppSelector';
 import {GetMarketResponse, MarketData} from '../../types/markets';
 import CoinButton from './components/CoinButton';
-import CoinCard from './components/CoinCard';
-import Skeleton from '../../components/Skeleton';
+import CoinItem from './components/CoinItem';
 
 const MarketsScreen = () => {
   const dispatch = useAppDispatch();
   const marketsData = useAppSelector(state => state.markets?.marketsData);
+  const listRef = useRef<FlatList>(null);
   const marketsSummariesData = useAppSelector(
     state => state.markets?.marketsSummariesData,
   );
@@ -60,7 +60,7 @@ const MarketsScreen = () => {
         ?.list || []
     );
   }, [activeCoin, marketsData]);
-  console.log('hung filteredData:', filteredData);
+
   const _renderCoinList = useMemo(() => {
     if (!getMarketsDataSuccess) {
       return <Skeleton width={100} height={32} />;
@@ -78,17 +78,23 @@ const MarketsScreen = () => {
     ));
   }, [activeCoin, getMarketsDataSuccess, marketsData]);
 
+  useEffect(() => {
+    if (listRef.current) {
+      listRef.current.scrollToOffset({offset: 0, animated: true});
+    }
+  }, [activeCoin]);
+
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     getMarketsHandler();
     getMarketSummariesHandler();
   }, [getMarketSummariesHandler, getMarketsHandler]);
 
-  const _renderList = useMemo(() => {
+  const _renderDetailList = useMemo(() => {
     if (!getMarketsDataSuccess || !getMarketsSummariesDataSuccess) {
       return (
         <FlatList
-          // ref={listRef}
+          ref={listRef}
           style={styles.list}
           data={Array.from({length: 10})}
           keyExtractor={(_, index) => index.toString()}
@@ -100,12 +106,12 @@ const MarketsScreen = () => {
 
     return (
       <FlatList
-        // ref={listRef}
+        ref={listRef}
         style={styles.list}
         data={filteredData}
         keyExtractor={item => item.id.toString()}
         renderItem={({item}: {item: MarketData}) => (
-          <CoinCard item={item} summaries={marketsSummariesData} />
+          <CoinItem item={item} summaries={marketsSummariesData} />
         )}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -132,10 +138,9 @@ const MarketsScreen = () => {
         </TouchableOpacity>
       </View>
 
-      {/* <View style={styles.coinList}></View> */}
       <View style={styles.coinList}>{_renderCoinList}</View>
 
-      {_renderList}
+      {_renderDetailList}
     </SafeAreaView>
   );
 };
