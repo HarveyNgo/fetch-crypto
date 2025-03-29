@@ -20,9 +20,7 @@ export const loginUser = createAsyncThunk<
     const response = await axiosInstance.post<ApiResponse<LoginResponse>>(
       LOGIN_URL,
       {
-        // ...credentials,
-        email: 'tokenize.test@gmail.com',
-        password: 'Test#111',
+        ...credentials,
         captcha: 'internal_testing_captcha',
       },
     );
