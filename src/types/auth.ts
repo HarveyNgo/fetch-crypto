@@ -12,14 +12,12 @@ export interface AuthState {
 }
 
 export interface LoginResponse {
-  data: {
-    accessToken: string;
-    enableTfa: number;
-    needToChangePassword: number;
-    needVerified: number;
-    refreshToken: string;
-    user: User;
-  };
+  accessToken: string;
+  enableTfa: number;
+  needToChangePassword: number;
+  needVerified: number;
+  refreshToken: string;
+  user: User;
 }
 
 export interface User {

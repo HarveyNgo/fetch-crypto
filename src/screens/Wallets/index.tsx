@@ -1,7 +1,11 @@
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 
 const WalletsScreen = () => {
-  return <View>WalletsScreen</View>;
+  return (
+    <View>
+      <Text>WalletsScreen</Text>
+    </View>
+  );
 };
 
 export default WalletsScreen;

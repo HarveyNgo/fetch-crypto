@@ -1,7 +1,11 @@
-import { View } from "react-native";
+import {Text, View} from 'react-native';
 
 const PortfolioScreen = () => {
-  return <View>PortfolioScreen</View>;
+  return (
+    <View>
+      <Text>PortfolioScreen</Text>
+    </View>
+  );
 };
 
 export default PortfolioScreen;

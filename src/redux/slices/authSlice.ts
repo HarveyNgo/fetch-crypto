@@ -1,46 +1,35 @@
 import {createSlice, createAsyncThunk, PayloadAction} from '@reduxjs/toolkit';
-import api, {AUTH_BASE_URL} from '../../services/api';
+import {AUTH_BASE_URL} from '../../services/api';
 import {
+  ApiResponse,
   AuthState,
   LoginCredentials,
   LoginResponse,
-  User,
 } from '../../types/auth';
 import createAxiosInstance from '../../services/api';
+import {LOGIN_URL} from '../../services/endpoint';
 
 // Async thunks
 export const loginUser = createAsyncThunk<
-  LoginResponse,
+  ApiResponse<LoginResponse>,
   LoginCredentials,
   {rejectValue: string}
->('auth/login', async (credentials, {rejectWithValue}) => {
+>(LOGIN_URL, async (credentials, {rejectWithValue}) => {
   try {
     const axiosInstance = await createAxiosInstance(AUTH_BASE_URL);
-    const response = await axiosInstance.post<LoginResponse>('/auth/login', {
-      // ...credentials,
-      email: 'tokenize.test@gmail.com',
-      password: 'Test#111',
-      captcha: 'internal_testing_captcha',
-    });
+    const response = await axiosInstance.post<ApiResponse<LoginResponse>>(
+      LOGIN_URL,
+      {
+        // ...credentials,
+        email: 'tokenize.test@gmail.com',
+        password: 'Test#111',
+        captcha: 'internal_testing_captcha',
+      },
+    );
     return response.data;
   } catch (error: any) {
     return rejectWithValue(
       error.response?.data?.message || 'Login failed. Please try again.',
-    );
-  }
-});
-
-export const fetchUserData = createAsyncThunk<
-  User,
-  void,
-  {rejectValue: string}
->('auth/fetchUserData', async (_, {rejectWithValue}) => {
-  try {
-    const response = await api.get<User>('/user/profile');
-    return response.data;
-  } catch (error: any) {
-    return rejectWithValue(
-      error.response?.data?.message || 'Failed to fetch user data.',
     );
   }
 });
@@ -57,11 +46,6 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    loginSuccess: (state, action: PayloadAction<LoginResponse>) => {
-      state.user = action.payload?.data.user;
-      state.accessToken = action.payload?.data.accessToken;
-      state.isAuthenticated = true;
-    },
     logout: state => {
       state.user = null;
       state.accessToken = null;
@@ -78,36 +62,18 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(
-        loginUser.fulfilled,
-        (state, action: PayloadAction<LoginResponse>) => {
-          state.loading = false;
-          state.isAuthenticated = true;
-          state.token = action.payload.token;
-          state.user = action.payload.user;
-        },
-      )
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.user = action.payload?.data?.user;
+        state.accessToken = action.payload?.data?.accessToken;
+        state.isAuthenticated = true;
+      })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || 'An unknown error occurred';
-      })
-      // Fetch user data
-      .addCase(fetchUserData.pending, state => {
-        state.loading = true;
-      })
-      .addCase(
-        fetchUserData.fulfilled,
-        (state, action: PayloadAction<User>) => {
-          state.loading = false;
-          state.user = action.payload;
-        },
-      )
-      .addCase(fetchUserData.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload || 'An unknown error occurred';
       });
+    // Fetch user data
   },
 });
 
-export const {logout, clearError, loginSuccess} = authSlice.actions;
+export const {logout, clearError} = authSlice.actions;
 export default authSlice.reducer;
