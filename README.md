@@ -63,3 +63,32 @@ You've successfully run and modified your React Native App. :partying_face:
 ### Testing:
 
 - **Jest**
+
+## 📂 Project Structure
+
+```
+
+/Users/harveyngo/Documents/Projects/fetchCrypto
+├── App.tsx
+├── Gemfile
+├── README.md
+├── android
+├── app.json
+├── babel.config.js
+├── generate-readme.js
+├── index.js
+├── ios
+├── jest.config.js
+├── metro.config.js
+├── node_modules
+├── package-lock.json
+├── package.json
+├── src
+└── tsconfig.json
+
+directory: 4 file: 12
+
+
+
+[2K[1G
+```
