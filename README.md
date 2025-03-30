@@ -95,3 +95,8 @@ directory: 4 file: 12
 
 [2K[1G
 ```
+
+## Test account:
+
+email: tokenize.test@gmail.com,
+password: Test#111,
