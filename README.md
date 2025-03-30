@@ -22,13 +22,16 @@ cd ios & pod install & cd ..
 
 Use one of the following commands to build and run your Android or iOS app:
 
-### Android
+### IOS
 
 ```sh
 npx react-native run-ios
+```
 
+### Android
+
+```sh
 npx react-native run-android
-
 ```
 
 ## Congratulations! :tada:
