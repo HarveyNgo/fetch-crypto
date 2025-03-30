@@ -1,4 +1,3 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {SCREEN_NAME} from './app.navigation';
 import {
@@ -86,6 +85,7 @@ const styles = StyleSheet.create({
   image: {
     width: 24,
     height: 24,
+    resizeMode: 'contain',
   },
   focusedColor: {
     tintColor: Colors.active,
