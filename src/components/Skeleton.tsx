@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#E0E0E0',
     overflow: 'hidden',
+    marginTop: 10,
   },
   gradient: {
     flex: 1,

@@ -7,7 +7,7 @@ import {
   TextStyle,
   View,
 } from 'react-native';
-import {TextInput} from 'react-native-gesture-handler';
+import {TextInput} from 'react-native';
 import {Colors} from '../constants/colors';
 import CryptoText from './CryptoText';
 

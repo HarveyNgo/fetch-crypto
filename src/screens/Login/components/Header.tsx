@@ -1,5 +1,4 @@
 import {Image, StyleSheet, View} from 'react-native';
-// import {styles} from '../styles';
 import {Images} from '../../../assets';
 import React from 'react';
 import {CryptoText} from '../../../components';
