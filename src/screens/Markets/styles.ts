@@ -28,15 +28,6 @@ export const styles = StyleSheet.create({
     width: 18,
     height: 18,
     marginRight: 19,
-  },
-  coinList: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 20,
-    marginHorizontal: 15,
-  },
-  detailList: {
-    backgroundColor: 'transparent',
-    marginHorizontal: 10,
+    resizeMode: 'contain',
   },
 });
