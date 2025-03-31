@@ -63,6 +63,10 @@ You've successfully run and modified your React Native App. :partying_face:
 
 - **i18next** and **react-i18next**: multiple languages.
 
+### Validation:
+
+- **formik (2.4.6)**: for validate form
+
 ### Testing:
 
 - **Jest**

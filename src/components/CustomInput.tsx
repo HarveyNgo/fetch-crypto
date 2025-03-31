@@ -58,10 +58,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   icon: {
-    width: 16,
-    height: 17,
+    width: 17,
+    height: 19,
     marginLeft: 14,
     marginRight: 9,
+    resizeMode: 'contain',
   },
   input: {
     flex: 1,

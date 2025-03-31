@@ -17,6 +17,7 @@ import {Formik} from 'formik';
 import {useAppDispatch} from '../../../redux/hook/useAppDispatch';
 import {loginUser} from '../../../redux/slices/authSlice';
 import {useTranslation} from 'react-i18next';
+import {setError} from '../../../redux/slices/commonSlide';
 
 interface LoginFormProps {}
 const LoginForm: FC<LoginFormProps> = ({}) => {
@@ -50,12 +51,15 @@ const LoginForm: FC<LoginFormProps> = ({}) => {
         setLoading(true);
         dispatch(loginUser({email: values.email, password: values.password}))
           .unwrap()
-          .then(() => {
+          .then(action => {
             setLoading(false);
+            if (loginUser.rejected.match(action)) {
+              dispatch(setError(action.payload));
+            }
           })
           .catch((error: string) => {
             setLoading(false);
-            console.log('Login error:', error);
+            dispatch(setError(error));
           });
       }}>
       {({values, errors, handleSubmit, handleChange}) => (

@@ -1,6 +1,7 @@
 import {configureStore, combineReducers} from '@reduxjs/toolkit';
 import authReducer from '../slices/authSlice';
 import marketsReducer from '../slices/marketsSlice';
+import commonReducer from '../slices/commonSlide';
 import {persistReducer, persistStore} from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -15,6 +16,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   auth: authReducer,
   markets: marketsReducer,
+  common: commonReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

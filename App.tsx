@@ -6,6 +6,7 @@ import {AppNavigation} from './src/navigations/app.navigation';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {PersistGate} from 'redux-persist/integration/react';
 import './src/locales/i18n';
+import ErrorModal from './src/components/ErrorModal';
 
 const App: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const App: React.FC = () => {
         <NavigationContainer>
           <GestureHandlerRootView>
             <AppNavigation />
+            <ErrorModal />
           </GestureHandlerRootView>
         </NavigationContainer>
       </PersistGate>

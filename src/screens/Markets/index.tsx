@@ -17,6 +17,7 @@ import {GetMarketResponse, MarketData} from '../../types/markets';
 import CoinButton from './components/CoinButton';
 import CoinItem from './components/CoinItem';
 import {useTranslation} from 'react-i18next';
+import {setError} from '../../redux/slices/commonSlide';
 
 const MarketsScreen = () => {
   const dispatch = useAppDispatch();
@@ -42,13 +43,19 @@ const MarketsScreen = () => {
         if (data.data) {
           setActiveCoin(data?.data[0].title);
         }
+      })
+      .catch((error: any) => {
+        dispatch(setError(error));
       });
   }, [dispatch]);
 
   const getMarketSummariesHandler = useCallback(() => {
     dispatch(getMarketSummaries({}))
       .unwrap()
-      .then(() => {});
+      .then(() => {})
+      .catch((error: any) => {
+        dispatch(setError(error));
+      });
   }, [dispatch]);
 
   useEffect(() => {

@@ -69,7 +69,6 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload || 'An unknown error occurred';
       });
-    // Fetch user data
   },
 });
 

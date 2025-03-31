@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.purple,
   },
-  //Background
   loginBackground: {
     position: 'absolute',
     width: width,
@@ -44,7 +43,7 @@ export const styles = StyleSheet.create({
     zIndex: 6,
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     marginHorizontal: 10,
   },
   inputForm: {
@@ -104,6 +103,7 @@ export const styles = StyleSheet.create({
   buttonContainer: {
     width: '100%',
     alignItems: 'center',
+    marginBottom: 62,
   },
   dontHaveAccount: {
     flexDirection: 'row',

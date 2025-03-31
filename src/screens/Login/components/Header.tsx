@@ -21,6 +21,7 @@ export default Header;
 export const styles = StyleSheet.create({
   logoContainer: {
     alignItems: 'center',
+    marginTop: 80,
   },
   logo: {
     width: 55,

@@ -21,7 +21,6 @@ export const getMarkets = createAsyncThunk<
     const response = await axiosInstance.get<ApiResponse<GetMarketResponse[]>>(
       GET_MARKETS_URL,
     );
-    console.log('hung response.data:', response.data);
     return response.data;
   } catch (error: any) {
     return rejectWithValue(
@@ -40,7 +39,6 @@ export const getMarketSummaries = createAsyncThunk<
     const response = await axiosInstance.get<ApiResponse<MarketSummaries[]>>(
       GET_MARKETS_SUMMARIES,
     );
-    console.log('hung getMarketSummaries response.data:', response.data);
     return response.data;
   } catch (error: any) {
     return rejectWithValue(
